@@ -37,8 +37,14 @@ def count_by_genre(file_name, genre):
     return len(genre_list)
 
 
-# def get_line_number_by_title(file_name, title):
-#
+def get_line_number_by_title(file_name, title):
+    title_list = ["0"]
+    with open(file_name, "r") as inputfile:
+        for line in inputfile:
+            title_list.append(line.split("\t", 1)[0])
+    for item in title_list:
+        if item == title:
+            return title_list.index(title)
 
 
 def sort_abc(file_name):
