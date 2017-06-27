@@ -17,7 +17,7 @@ def count_games(file_name):
 
 def decide(file_name, year):
     with open(file_name) as inputfile:
-        return any(year in line for line in inputfile)
+        return any(str(year) in line for line in inputfile)
 
 
 def get_latest(file_name):
@@ -43,7 +43,7 @@ def count_by_genre(file_name, genre):
 
 def sort_abc(file_name):
     abc_list = []
-    for game in sorted(stats.keys()):
+    for game in sorted(stats.keys(), key=str.lower):
         abc_list.append(game)
     return abc_list
 
@@ -52,7 +52,7 @@ def get_genres(file_name):
     genres = set()
     for game in stats.values():
         genres.add(game["genre"])
-    return sorted(list(genres))
+    return sorted(list(genres), key=str.lower)
 
 
 # def when_was_top_sold_fps(file_name):
