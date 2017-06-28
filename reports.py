@@ -29,11 +29,7 @@ def get_latest(file_name):
 
 
 def count_by_genre(file_name, genre):
-    genre_list = []
-    for game in stats:
-        for value in stats[game].values():
-            if value == genre:
-                genre_list.append(game)
+    genre_list = [game for game in stats for value in stats[game].values() if value == genre]
     return len(genre_list)
 
 
@@ -48,16 +44,12 @@ def get_line_number_by_title(file_name, title):
 
 
 def sort_abc(file_name):
-    abc_list = []
-    for game in sorted(stats.keys(), key=str.lower):
-        abc_list.append(game)
+    abc_list = [game for game in sorted(stats.keys(), key=str.lower)]
     return abc_list
 
 
 def get_genres(file_name):
-    genres = set()
-    for game in stats.values():
-        genres.add(game["genre"])
+    genres = set(game["genre"] for game in stats.values())
     return sorted(list(genres), key=str.lower)
 
 
