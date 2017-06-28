@@ -29,7 +29,8 @@ def get_latest(file_name):
 
 
 def count_by_genre(file_name, genre):
-    genre_list = [game for game in stats for value in stats[game].values() if value == genre]
+    genre_list = [game for game in stats for value in stats[game].values()
+                  if value == genre]
     return len(genre_list)
 
 
@@ -53,5 +54,14 @@ def get_genres(file_name):
     return sorted(list(genres), key=str.lower)
 
 
-# def when_was_top_sold_fps(file_name):
-#
+def when_was_top_sold_fps(file_name):
+    copies_dict = {}
+    for val1 in stats.values():
+        for val2 in val1.values():
+            if val2 == "First-person shooter":
+                copies_dict[float(val1["copies"])] = val1["release"]
+    copies_dict = OrderedDict(sorted(copies_dict.items(), key=lambda t: t[0]))
+    if copies_dict == {}:
+        ValueError
+    else:
+        return int(list(copies_dict.values())[-1])
