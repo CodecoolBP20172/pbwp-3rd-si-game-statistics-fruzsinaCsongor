@@ -1,4 +1,5 @@
 from statistics import mean
+from math import ceil
 from collections import OrderedDict
 
 stats = {}
@@ -20,32 +21,30 @@ def get_most_played(file_name):
 
 
 def sum_sold(file_name):
-    copies_list = []
-    for val1 in stats.values():
-        for key2, val2 in val1.items():
-            if key2 == "copies":
-                copies_list.append(float(val2))
+    copies_list = [float(val2) for val1 in stats.values()
+                   for key2, val2 in val1.items()
+                   if key2 == "copies"]
     return round(sum(copies_list), 2)
 
 
 def get_selling_avg(file_name):
-    copies_list = []
-    for val1 in stats.values():
-        for key2, val2 in val1.items():
-            if key2 == "copies":
-                copies_list.append(float(val2))
+    copies_list = [float(val2) for val1 in stats.values()
+                   for key2, val2 in val1.items()
+                   if key2 == "copies"]
     return mean(copies_list)
 
 
 def count_longest_title(file_name):
-    names_list = []
-    for game in stats.keys():
-        names_list.append(game)
+    names_list = [game for game in stats.keys()]
     longest = sorted(names_list, key=len)[-1]
     return len(longest)
 
 
-# def get_date_avg(file_name):
+def get_date_avg(file_name):
+    date_list = [int(val2) for val1 in stats.values()
+                 for key2, val2 in val1.items()
+                 if key2 == "release"]
+    return ceil(mean(date_list))
 
 
 # def get_game(file_name, title):
