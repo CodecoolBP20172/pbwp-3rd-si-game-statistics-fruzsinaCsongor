@@ -59,11 +59,9 @@ def get_game(file_name, title):
 
 
 def count_grouped_by_genre(file_name):
-    genre_list = []
-    for val in stats.values():
-        for key2, val2 in val.items():
-            if key2 == "genre":
-                genre_list.append(val2)
+    genre_list = [val2 for val in stats.values()
+                  for key2, val2 in val.items()
+                  if key2 == "genre"]
     return {x: genre_list.count(x) for x in genre_list}
 
 
