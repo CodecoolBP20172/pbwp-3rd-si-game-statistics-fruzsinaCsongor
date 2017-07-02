@@ -58,7 +58,20 @@ def get_game(file_name, title):
     return game_list
 
 
-# def count_grouped_by_genre(file_name):
+def count_grouped_by_genre(file_name):
+    genre_list = []
+    for val in stats.values():
+        for key2, val2 in val.items():
+            if key2 == "genre":
+                genre_list.append(val2)
+    return {x: genre_list.count(x) for x in genre_list}
 
 
-# def get_date_ordered(file_name):
+def get_date_ordered(file_name):
+    date_dict = {}
+    for val1 in stats.values():
+        for val2 in val1.values():
+            date_dict[val1["title"]] = int(val1["release"])
+    date_dict = list(v[0] for v in sorted(date_dict.items(),
+                     key=lambda kv: (-kv[1], kv[0])))
+    return date_dict
