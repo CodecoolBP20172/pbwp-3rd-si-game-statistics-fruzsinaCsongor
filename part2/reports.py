@@ -47,7 +47,15 @@ def get_date_avg(file_name):
     return ceil(mean(date_list))
 
 
-# def get_game(file_name, title):
+def get_game(file_name, title):
+    with open("game_stat.txt", "r") as inputfile:
+        for line in inputfile:
+            if line.split("\t", 1)[0] == title:
+                game = line
+    game_list = [x.strip() for x in game.split("\t")]
+    game_list[1] = float(game_list[1])
+    game_list[2] = int(game_list[2])
+    return game_list
 
 
 # def count_grouped_by_genre(file_name):
